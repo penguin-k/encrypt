@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>512-bit Text Encryptor</title>
+        
+        <link rel="icon" 
+      type="image/png" 
+      href="http://www.iconarchive.com/download/i87099/graphicloads/colorful-long-shadow/Lock.ico">
+        
+        <style>
+            body {
+                font-family: monospace;
+            }
+            input {
+                font-family: monospace;
+                width: 400px;
+            }
+            textarea {
+                font-family: monospace;
+                width: 400px;
+                resize: none;
+            }
+            #info {
+                position: absolute;
+                width: 30px;
+                left: 150px;
+                top: 10px;
+            }
+            #generate {
+                position: absolute;
+                top: 202px;
+                left: 267px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Military Grade (512-bit) Text Encryptor</h1>
+        <p>Enter the text to encrypt:</p>
+        <textarea type="text" id="text" rows="6"></textarea>
+        <p>Enter the encrytion key:</p>
+        <button onclick="generate()" id="generate">Generate random key</button>
+        <input type="password" id="key">
+        <button id="showhidePW" onclick="togglePWshow()">Show key</button><br><br>
+        <button onclick="encrypt()">Encrypt</button>
+        <button onclick="decrypt()">Decrypt</button><br><br>
+        <p id="output"></p>
+        <p id="debug"></p>
+        
+        <script>
+            function encrypt() {
+                //console.log("----------------");
+                var text = document.getElementById("text").value;
+                var key = document.getElementById("key").value;
+                //var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�$%^&_={}:;@'~#<,>./|`� abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�$%^&_={}:;@'~#<,>./|`� abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�$%^&_={}:;@'~#<,>./|`� ";
+                var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�%&();:~,.? abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�%&();:~,.? abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�%&();:~,.? ";
+                //var chars = "abcdefghijklmnopqrstuvwxyz"
+                var output = "";
+                var keyNum = 0;
+                var char = "";
+                var keychar = "";
+                var finalchar = "";
+                for (var i = 0; i < text.length; i++) {
+                    char = chars.indexOf((text.substring(i, i+1)))+75;
+                    //console.log("char "+char);
+                    //keychar = chars.search(key.substring(keyNum, KeyNum+1));
+                    //document.getElementById("output").innerHTML = key.substring(keyNum, keyNum+1);
+                    keychar = (chars.indexOf(key.substring(keyNum, keyNum+1)));
+                    //console.log("keychar "+keychar);
+                    //console.log("char - keychar "+parseFloat(char)-parseFloat(keychar));
+                    finalchar = chars[parseFloat(char)-parseFloat(keychar)];
+                    
+                    output = output + finalchar;
+                    if (keyNum >= key.length-1) {
+                        keyNum = 0;
+                    } else {
+                        keyNum++;
+                    }
+                    
+                }
+                document.getElementById("output").innerHTML = output;
+            }
+            
+            function decrypt() {
+                //console.log("----------------");
+                var text = document.getElementById("text").value;
+                var key = document.getElementById("key").value;
+                //var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�$%^&_={}:;@'~#<,>./|`� abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�$%^&_={}:;@'~#<,>./|`� abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�$%^&_={}:;@'~#<,>./|`� ";
+                
+                var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�%&();:~,.? abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�%&();:~,.? abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�%&();:~,.? ";                //var chars = "abcdefghijklmnopqrstuvwxyz"
+                var output = "";
+                var keyNum = 0;
+                var char = "";
+                var keychar = "";
+                var finalchar = "";
+                for (var i = 0; i < text.length; i++) {
+                    char = chars.indexOf((text.substring(i, i+1)));
+                    //console.log("char "+char);
+                    //keychar = chars.search(key.substring(keyNum, KeyNum+1));
+                    //document.getElementById("output").innerHTML = key.substring(keyNum, keyNum+1);
+                    keychar = (chars.indexOf(key.substring(keyNum, keyNum+1)))+75;
+                    //console.log("keychar "+keychar);
+                    //console.log("char - keychar "+parseFloat(char)-parseFloat(keychar));
+                    finalchar = chars[parseFloat(char)+parseFloat(keychar)];
+                    
+                    output = output + finalchar;
+                    if (keyNum >= key.length-1) {
+                        keyNum = 0;
+                    } else {
+                        keyNum++;
+                    }
+                    
+                }
+                document.getElementById("output").innerHTML = output;
+            }
+            
+            function generate() {
+                var code = "";
+                var letter = "";
+                var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�%&();:~,.? abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�%&();:~,.? abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�%&();:~,.? ";   
+                for (var i = 0; i < 512; i++) {
+                    letter = Math.floor(Math.random() * chars.length-1) + 0;
+                    code = code + (chars.substring(letter, letter+1)).toString();
+                }
+                document.getElementById("key").value=code;
+                document.getElementById("key").type="text";
+                document.getElementById("showhidePW").textContent="Hide key";
+            }
+            
+            function togglePWshow() {
+                if (document.getElementById("key").type == "text") {
+                    document.getElementById("key").type="password";
+                    document.getElementById("showhidePW").textContent="Show key";
+                } else {
+                    document.getElementById("key").type="text";
+                    document.getElementById("showhidePW").textContent="Hide key";
+                }
+            }
+            
+            function hidePWtext() {
+                document.getElementById("key").type="password";
+                document.getElementById("showhidePW").textContent="Show key";
+            }
+        </script>
+    </body>
+</html>
