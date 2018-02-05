@@ -29,6 +29,12 @@
 			left: 267px;
 		}
 		</style>
+		<script>
+			function loadScript() {
+				sessionStorage.setItem("charStorage", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�%&();:~,.? abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�%&();:~,.? abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�%&();:~,.? ");
+				sessionStorage.setItem("charCount", String((sessionStorage.getItem("charStorage").length)/3));
+			};
+		</script>
 	</head>
 	<body>
 		<h1>Military Grade (512-bit) Text Encryptor</h1>
@@ -49,7 +55,7 @@
 				var text = document.getElementById("text").value;
 				var key = document.getElementById("key").value;
 				//var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�$%^&_={}:;@'~#<,>./|`� abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�$%^&_={}:;@'~#<,>./|`� abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�$%^&_={}:;@'~#<,>./|`� ";
-				var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�%&();:~,.? abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�%&();:~,.? abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�%&();:~,.? ";
+				var chars = sessionStorage.getItem("charStorage");
 				//var chars = "abcdefghijklmnopqrstuvwxyz"
 				var output = "";
 				var keyNum = 0;
@@ -57,7 +63,7 @@
 				var keychar = "";
 				var finalchar = "";
 				for (var i = 0; i < text.length; i++) {
-					char = chars.indexOf((text.substring(i, i+1)))+75;
+					char = chars.indexOf((text.substring(i, i+1)))+parseInt(sessionStorage.getItem("charCount"));
 					//console.log("char "+char);
 					//keychar = chars.search(key.substring(keyNum, KeyNum+1));
 					//document.getElementById("output").innerHTML = key.substring(keyNum, keyNum+1);
@@ -80,7 +86,7 @@
 				var text = document.getElementById("text").value;
 				var key = document.getElementById("key").value;
 				//var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�$%^&_={}:;@'~#<,>./|`� abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�$%^&_={}:;@'~#<,>./|`� abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�$%^&_={}:;@'~#<,>./|`� ";
-				var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�%&();:~,.? abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�%&();:~,.? abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�%&();:~,.? ";                //var chars = "abcdefghijklmnopqrstuvwxyz"
+				var chars = sessionStorage.getItem("charStorage");
 				var output = "";
 				var keyNum = 0;
 				var char = "";
@@ -91,7 +97,7 @@
 					//console.log("char "+char);
 					//keychar = chars.search(key.substring(keyNum, KeyNum+1));
 					//document.getElementById("output").innerHTML = key.substring(keyNum, keyNum+1);
-					keychar = (chars.indexOf(key.substring(keyNum, keyNum+1)))+75;
+					keychar = (chars.indexOf(key.substring(keyNum, keyNum+1)))+parseInt(sessionStorage.getItem("charCount"));
 					//console.log("keychar "+keychar);
 					//console.log("char - keychar "+parseFloat(char)-parseFloat(keychar));
 					finalchar = chars[parseFloat(char)+parseFloat(keychar)];
@@ -108,7 +114,7 @@
 			function generate() {
 				var code = "";
 				var letter = "";
-				var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�%&();:~,.? abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�%&();:~,.? abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�%&();:~,.? ";   
+				var chars = sessionStorage.getItem("charStorage");   
 				for (var i = 0; i < 512; i++) {
 					letter = Math.floor(Math.random() * chars.length-1) + 0;
 					code = code + (chars.substring(letter, letter+1)).toString();
