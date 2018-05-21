@@ -10,6 +10,7 @@ function encrypt(textraw, keyraw) {
   var char = "";
   var keychar = "";
   var finalchar = "";
+  var output = "";
   console.log(text);
   console.log(key);
   for (var i = 0; i < text.length; i++) {
@@ -39,6 +40,7 @@ function decrypt(textraw, keyraw) {
   var char = "";
   var keychar = "";
   var finalchar = "";
+  var output = "";
   for (var i = 0; i < text.length; i++) {
     char = chars.indexOf((text.substring(i, i+1)));
     //console.log("char "+char);
