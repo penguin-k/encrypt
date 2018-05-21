@@ -10,7 +10,7 @@ function encrypt(text, key) {
   var keychar = "";
   var finalchar = "";
   for (var i = 0; i < text.length; i++) {
-    char = chars.indexOf((text.substring(i, i+1)))+parseInt(sessionStorage.getItem("charCount"));
+    char = chars.indexOf((text.substring(i, i+1)))+261;
     keychar = (chars.indexOf(key.substring(keyNum, keyNum+1)));
     finalchar = chars[parseFloat(char)-parseFloat(keychar)];
     output = output + finalchar;
@@ -39,7 +39,7 @@ function decrypt(text, key) {
     //console.log("char "+char);
     //keychar = chars.search(key.substring(keyNum, KeyNum+1));
     //document.getElementById("output").innerHTML = key.substring(keyNum, keyNum+1);
-    keychar = (chars.indexOf(key.substring(keyNum, keyNum+1)))+parseInt(sessionStorage.getItem("charCount"));
+    keychar = (chars.indexOf(key.substring(keyNum, keyNum+1))+261);
     //console.log("keychar "+keychar);
     //console.log("char - keychar "+parseFloat(char)-parseFloat(keychar));
     finalchar = chars[parseFloat(char)+parseFloat(keychar)];
