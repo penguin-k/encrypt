@@ -1,7 +1,7 @@
 //A JS library
 function encrypt(textraw, keyraw) {
   //console.log("----------------");
-  var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�$%^&_={}:;@'~#<,>./|`� abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�$%^&_={}:;@'~#<,>./|`� abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�$%^&_={}:;@'~#<,>./|`� ";
+  var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�$%^&_={}:;@'~#<,>./|� abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�$%^&_={}:;@'~#<,>./|� abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�$%^&_={}:;@'~#<,>./`� ";
   //var chars = sessionStorage.getItem("charStorage");
   //var chars = "abcdefghijklmnopqrstuvwxyz"var output = "";
   var text = String(textraw);
@@ -14,7 +14,7 @@ function encrypt(textraw, keyraw) {
   console.log(text);
   console.log(key);
   for (var i = 0; i < text.length; i++) {
-    char = chars.indexOf((text.substring(i, i+1)))+87;
+    char = chars.indexOf((text.substring(i, i+1)))+86;
     keychar = (chars.indexOf(key.substring(keyNum, keyNum+1)));
     finalchar = chars[parseFloat(char)-parseFloat(keychar)];
     output = output + finalchar;
@@ -31,7 +31,7 @@ function decrypt(textraw, keyraw) {
   //console.log("----------------");
   //var text = document.getElementById("text").value;
   //var key = document.getElementById("key").value;
-  var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�$%^&_={}:;@'~#<,>./|`� abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�$%^&_={}:;@'~#<,>./|`� abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�$%^&_={}:;@'~#<,>./|`� ";
+  var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�$%^&_={}:;@'~#<,>./|� abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�$%^&_={}:;@'~#<,>./|� abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!�$%^&_={}:;@'~#<,>./|� ";
   //var chars = sessionStorage.getItem("charStorage");
   var text = String(textraw);
   var key = String(keyraw);
@@ -46,7 +46,7 @@ function decrypt(textraw, keyraw) {
     //console.log("char "+char);
     //keychar = chars.search(key.substring(keyNum, KeyNum+1));
     //document.getElementById("output").innerHTML = key.substring(keyNum, keyNum+1);
-    keychar = (chars.indexOf(key.substring(keyNum, keyNum+1))+87);
+    keychar = (chars.indexOf(key.substring(keyNum, keyNum+1))+86);
     //console.log("keychar "+keychar);
     //console.log("char - keychar "+parseFloat(char)-parseFloat(keychar));
     finalchar = chars[parseFloat(char)+parseFloat(keychar)];
